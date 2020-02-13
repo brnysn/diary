@@ -6,9 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class State extends Model
 {
-    protected $primaryKey = 'id';
     public $timestamps = false;
-
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'id', 'name'
@@ -20,7 +19,6 @@ class State extends Model
             'id', 'name'
         ];
     }
-
 
     public function cities()
     {

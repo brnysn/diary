@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class City extends Model
 {
-    protected $primaryKey = 'id';
     public $timestamps = false;
+    
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'id', 'state_id', 'name'
     ];
-
 
     public static function selectable()
     {
