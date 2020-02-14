@@ -3,7 +3,7 @@
 return [
 
 
-    'name' => env('APP_NAME', 'Diary'),
+    'name' => env('APP_NAME', 'Diary by brnysn'),
 
     'env' => env('APP_ENV', 'production'),
 
@@ -13,7 +13,7 @@ return [
 
     'asset_url' => env('ASSET_URL', null),
 
-    'timezone' => 'UTC',
+    'timezone' => env('APP_TIMEZONE', 'UTC'),
 
     'locale' => env('APP_LOCALE', 'en'),
 

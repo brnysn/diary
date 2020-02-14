@@ -26,5 +26,20 @@ Route::group(['middleware' => ['auth']], function () {
     // Delete
     Route::delete('tags/{id}', 'TagController@destroy')->name('tags.destroy');
 
+    // =====   CONTACTS   =====
+    // Browse
+    Route::get('contacts', 'ContactController@index')->name('contacts.index');
+    Route::get('contacts/datatable', 'ContactController@datatable')->name('contacts.datatable');
+    // Add
+    Route::get('contacts/create', 'ContactController@create')->name('contacts.create');
+    Route::post('contacts/create', 'ContactController@store')->name('contacts.store');
+    // Read / Redirect To Edit
+    Route::get('contacts/{id}', 'ContactController@edit');
+    // Edit
+    Route::get('contacts/{id}/edit', 'ContactController@edit')->name('contacts.edit');
+    Route::patch('contacts/{id}', 'ContactController@update')->name('contacts.update');
+    // Delete
+    Route::delete('contacts/{id}', 'ContactController@destroy')->name('contacts.destroy');
+
     
 });

@@ -92,7 +92,7 @@
                         {'_token': '{{Session::token()}}' })
                     .then(s => {
                         $.unblockUI()
-                        window.location.href = "{{route('tags.index')}}"
+                        window.location.href = "{{route('homepage')}}"+"/"+this.dataset.route
                     })
                     .catch(e => {
                         $.unblockUI()

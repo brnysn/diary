@@ -17,6 +17,9 @@
                     <div class="col-3">
                         <a href="{{ route('tags.index') }}">Etiketler</a>
                     </div>
+                    <div class="col-3">
+                        <a href="{{ route('contacts.index') }}">Kişiler</a>
+                    </div>
                 </div>
             </div>
         </div>

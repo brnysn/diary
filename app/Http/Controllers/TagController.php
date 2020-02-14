@@ -16,9 +16,7 @@ class TagController extends Controller
 
     public function index()
     {
-
-        $tags= Tag::with('journals')->get();
-        return view('tag.index', compact(['tags']));
+        return view('tag.index');
     }
 
     public function edit($id)
