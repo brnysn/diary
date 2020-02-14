@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Category extends Model
+class Tag extends Model
 {
 
     use SoftDeletes;
@@ -20,6 +20,6 @@ class Category extends Model
 
     public function journals()
     {
-        return $this->belongsToMany('App\Journal', 'journal_has_categories', 'category_id', 'journal_id');
+        return $this->belongsToMany('App\Journal', 'journal_has_tags', 'tag_id', 'journal_id');
     }
 }

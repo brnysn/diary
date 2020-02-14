@@ -14,7 +14,9 @@
                         </div>
                     @endif
 
-                    Giriş Yaptın
+                    <div class="col-3">
+                        <a href="{{ route('tags.index') }}">Etiketler</a>
+                    </div>
                 </div>
             </div>
         </div>

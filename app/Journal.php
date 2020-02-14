@@ -17,9 +17,9 @@ class Journal extends Model
         'title', 'date', 'content'
     ];
 
-    public function categories()
+    public function tags()
     {
-        return $this->belongsToMany('App\Category', 'journal_has_categories', 'journal_id', 'category_id');
+        return $this->belongsToMany('App\Tag', 'journal_has_tags', 'journal_id', 'tag_id');
     }
 
     public function contacts()

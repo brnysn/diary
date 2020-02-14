@@ -9,17 +9,17 @@
 
     <title>{{ config('app.name', 'Diary by brnysn') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets') }}/fontawesome/css/all.min.css" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
+    @include('sweetalert::alert')
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -76,5 +76,36 @@
             @yield('content')
         </main>
     </div>
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js') }}/jquery-3.4.1.min.js"></script>
+    <script src="{{ asset('js') }}/jquery.blockUI.js" defer></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" type="text/javascript" defer></script>
+    <script>
+        $(function(){
+            $('.deleteButton').click(function(){
+                $.blockUI({
+                    message: `<h3 style="border: none;">İşleminiz Yapılıyor... </h3>`
+                });
+                if(confirm('Silmek istediğinize emin misiniz?')) {
+                    axios.delete("{{route('homepage')}}"+"/"+this.dataset.route+"/"+this.dataset.id,
+                        {'_token': '{{Session::token()}}' })
+                    .then(s => {
+                        $.unblockUI()
+                        window.location.href = "{{route('tags.index')}}"
+                    })
+                    .catch(e => {
+                        $.unblockUI()
+                        alert('Silinemedi.')
+                    })
+                }
+                else {
+                        $.unblockUI()
+                }
+            })
+        })
+    </script>
+    @yield('js')
+
 </body>
 </html>
