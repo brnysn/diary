@@ -41,5 +41,23 @@ Route::group(['middleware' => ['auth']], function () {
     // Delete
     Route::delete('contacts/{id}', 'ContactController@destroy')->name('contacts.destroy');
 
-    
+    // =====   Journal   =====
+    // Browse
+    Route::get('journals', 'JournalController@index')->name('journals.index');
+    Route::get('journals/datatable', 'JournalController@datatable')->name('journals.datatable');
+    // Add
+    Route::get('journals/create', 'JournalController@create')->name('journals.create');
+    Route::post('journals/create', 'JournalController@store')->name('journals.store');
+    // Read / Redirect To Edit
+    Route::get('journals/{id}', 'JournalController@edit');
+    // Edit
+    Route::get('journals/{id}/edit', 'JournalController@edit')->name('journals.edit');
+    Route::patch('journals/{id}', 'JournalController@update')->name('journals.update');
+    // Delete
+    Route::delete('journals/{id}', 'JournalController@destroy')->name('journals.destroy');
+
+
+    // Get cities from state_id
+    Route::post('states/cities', 'StateController@getCities')->name('states.cities');
+
 });

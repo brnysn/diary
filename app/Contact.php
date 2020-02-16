@@ -13,16 +13,18 @@ class Contact extends Model
 
     protected $dates = ['deleted_at'];
 
+    protected $hidden = ['deleted_at'];
+
     protected $fillable = [
         'firstname', 'lastname', 'email', 'phone'
     ];
     
     protected $appends = [
-        'full_name'
+        'fullname'
      ];
  
 
-    public function getFullNameAttribute()
+    public function getFullnameAttribute()
     {
         return "{$this->firstname} {$this->lastname}";
     }

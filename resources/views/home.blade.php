@@ -3,26 +3,37 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+
+        <div class="col-md-4">
             <div class="card">
-                <div class="card-header">Anasayfa</div>
-
+                <div class="card-header"><i class="fas fa-tag"></i> Etiketler</div>
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    <div class="col-3">
-                        <a href="{{ route('tags.index') }}">Etiketler</a>
-                    </div>
-                    <div class="col-3">
-                        <a href="{{ route('contacts.index') }}">Kişiler</a>
-                    </div>
+                        <a href="{{ route('tags.create') }}">Etiket Ekle</a><br>
+                        <a href="{{ route('tags.index') }}">Etiketleri Göster</a>
                 </div>
             </div>
         </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">Günlük</div>
+                <div class="card-body">
+                        <a href="{{ route('journals.create') }}">Yaz</a><br>
+                        <a href="{{ route('journals.index') }}">Göster</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header"><i class="fas fa-users"></i> Kişiler</div>
+                <div class="card-body">
+                        <a href="{{ route('contacts.create') }}">Kişi Ekle</a><br>
+                        <a href="{{ route('contacts.index') }}">Kişileri Göster</a>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 @endsection

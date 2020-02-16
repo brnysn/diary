@@ -10,6 +10,8 @@ class City extends Model
     
     protected $primaryKey = 'id';
 
+    protected $hidden = ['deleted_at'];
+
     protected $fillable = [
         'id', 'state_id', 'name'
     ];
@@ -24,6 +26,11 @@ class City extends Model
     public function state()
     {
         return $this->belongsTo(State::class);
+    }
+
+    public function journal()
+    {
+        return $this->hasMany(Journal::class);
     }
     
 }

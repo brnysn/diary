@@ -12,9 +12,11 @@ class Journal extends Model
     protected $primaryKey = 'id';
 
     protected $dates = ['deleted_at'];
+    
+    protected $hidden = ['deleted_at'];
 
     protected $fillable = [
-        'title', 'date', 'content'
+        'title', 'date', 'content', 'state_id', 'city_id'
     ];
 
     public function tags()
@@ -26,4 +28,15 @@ class Journal extends Model
     {
         return $this->belongsToMany('App\Contact', 'journal_has_contacts', 'journal_id', 'contact_id');
     }
+
+    public function state()
+    {
+        return $this->belongsTo(State::class);
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
+
 }

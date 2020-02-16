@@ -14,6 +14,8 @@ class Tag extends Model
 
     protected $dates = ['deleted_at'];
 
+    protected $hidden = ['deleted_at'];
+
     protected $fillable = [
         'name'
     ];

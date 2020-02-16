@@ -8,18 +8,17 @@ use App\Contact;
 class ContactController extends Controller
 {
     public function datatable(){
-        return datatables(Contact::with(['journals'])->get())->toJson();
+        return datatables(Contact::all())->toJson();
     }
 
     public function index()
     {
-        $contacts= Contact::with('journals')->get();
-        return view('contact.index', compact(['contacts']));
+        return view('contact.index');
     }
 
     public function edit($id)
     {
-        $contact= Contact::with('journals')->findOrFail($id);
+        $contact= Contact::findOrFail($id);
         return view('contact.edit', compact(['contact']));
     }
 
@@ -39,14 +38,12 @@ class ContactController extends Controller
         $request->validate([
             'firstname' => 'required|min:2',
             'lastname' => 'required|min:2',
-            'email' => 'email',
         ],
         [
             'firstname.required' => 'Kişi ismi zorunludur.',
             'firstname.min' => 'Kişi ismi en az 2 karakter olmak zorundadır.',
             'lastname.required' => 'Kişi soyismi zorunludur.',
             'lastname.min' => 'Kişi soyismi en az 2 karakter olmak zorundadır.',
-            'email.email' => 'Lütfen geçerli bir e-posta adresi giriniz.',
         ]);
 
         $contact = Contact::findOrFail($id);
@@ -66,17 +63,15 @@ class ContactController extends Controller
         $request->validate([
             'firstname' => 'required|min:2',
             'lastname' => 'required|min:2',
-            'email' => 'email',
         ],
         [
             'firstname.required' => 'Kişi ismi zorunludur.',
             'firstname.min' => 'Kişi ismi en az 2 karakter olmak zorundadır.',
             'lastname.required' => 'Kişi soyismi zorunludur.',
             'lastname.min' => 'Kişi soyismi en az 2 karakter olmak zorundadır.',
-            'email.email' => 'Lütfen geçerli bir e-posta adresi giriniz.',
         ]);
     
-        $contact=Contact::create($request->all());
+        Contact::create($request->all());
 
         return redirect()->route('contacts.index')->withSuccess('Kişi başarılı bir şekilde kaydedildi.');
     }

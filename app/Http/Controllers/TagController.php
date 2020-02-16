@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 class TagController extends Controller
 {
     public function datatable(){
-        return datatables(Tag::with(['journals'])->get())->toJson();
+        return datatables(Tag::all())->toJson();
     }
 
     public function index()
@@ -21,7 +21,7 @@ class TagController extends Controller
 
     public function edit($id)
     {
-        $tag= Tag::with('journals')->findOrFail($id);
+        $tag= Tag::findOrFail($id);
         return view('tag.edit', compact(['tag']));
     }
 
@@ -70,8 +70,9 @@ class TagController extends Controller
             'name.unique' => 'Bu isimle daha önce bir etiket kayıt edilmiş.'
         ]);
     
-        $tag=Tag::create($request->all());
+        Tag::create($request->all());
 
         return redirect()->route('tags.index')->withSuccess('Etiket başarılı bir şekilde kaydedildi.');
     }
+    
 }

@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class State extends Model
 {
     public $timestamps = false;
+
     protected $primaryKey = 'id';
+
+    protected $hidden = ['deleted_at'];
 
     protected $fillable = [
         'id', 'name'
@@ -25,4 +28,8 @@ class State extends Model
         return $this->hasMany(City::class);
     }
 
+    public function journal()
+    {
+        return $this->hasMany(Journal::class);
+    }
 }
