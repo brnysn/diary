@@ -48,10 +48,10 @@
 
                             <div class="row form-group">
                                 <div class="col-3 text-right form-text">
-                                    <label for="date">Tarih</label>
+                                    <label for="date">Tarih</label> 
                                 </div>
-                                <div class="col-9">
-                                    <input type="datetime-local" class="form-control @error('date') is-invalid @enderror" name="date" id="date" value="{{ $journal->date }}">
+                                <div class="col-9">{{$journal->date}}
+                                    <input type="date" class="form-control @error('date') is-invalid @enderror" name="date" id="date" value="{{ $journal->date }}">
 
                                     @error('date')
                                         <span class="invalid-feedback" role="alert">
@@ -71,7 +71,7 @@
                                         <option value=""> İl Seçiniz</option> 
                                         @if ($states->count())
                                             @foreach($states as $state)
-                                                <option {{ (old('state_id') == $state->id || $journal->state_id == $state->id) ? "selected" : "" }} value="{{ $state->state_id }}">{{ $state->name }}</option>
+                                                <option {{ (old('state_id') == $state->id || $journal->state_id == $state->id) ? "selected" : "" }} value="{{ $state->id }}">{{ $state->name }}</option>
                                             @endforeach
                                         @endif
 
@@ -103,6 +103,7 @@
                                     @enderror
                                 </div>
                             </div>
+
                             @if(!empty($tags))
                                 <div class="form-group row">
                                     <label class="col-3 text-right form-text">Etiketler</label>

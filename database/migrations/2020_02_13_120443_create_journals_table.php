@@ -16,7 +16,7 @@ class CreateJournalsTable extends Migration
         Schema::create('journals', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->dateTime('date');
+            $table->date('date');
             $table->string('content')->nullable();
             $table->unsignedInteger('state_id'); // Not required. Can be avoidable.
             $table->foreign('state_id')->references('id')->on('states')->onDelete('CASCADE')->onUpdate('CASCADE');

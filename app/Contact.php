@@ -15,6 +15,8 @@ class Contact extends Model
 
     protected $hidden = ['deleted_at'];
 
+    protected $touches = ['journals'];
+
     protected $fillable = [
         'firstname', 'lastname', 'email', 'phone'
     ];

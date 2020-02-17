@@ -11,7 +11,7 @@ class Journal extends Model
 
     protected $primaryKey = 'id';
 
-    protected $dates = ['deleted_at'];
+    protected $dates = ['date', 'deleted_at'];
     
     protected $hidden = ['deleted_at'];
 

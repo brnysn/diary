@@ -56,7 +56,21 @@ class JournalController extends Controller
 
         $journal = Journal::findOrFail($id);
 
-        $journal->update($request->all());
+        $journal->update($request->except('tags', 'contacts'));
+
+        if(!empty($request->tags))
+        {
+            $journal->tags()->sync( array_keys($request->tags) );
+        } else {
+            $journal->tags()->detach();
+        }
+
+        if(!empty($request->contacts))
+        {
+            $journal->contacts()->sync( array_keys($request->contacts) );
+        } else {
+            $journal->contacts()->detach();
+        }
 
         return redirect()->route('journals.index')->withSuccess('Günlük başarılı bir şekilde güncellendi.');
     }
@@ -85,28 +99,28 @@ class JournalController extends Controller
     
         $journal = Journal::create($request->except('tags', 'contacts'));
 
-        if($request->tags)
+        if(!empty($request->tags))
         {
             foreach ($request->tags as $tag => $value) 
             {
                 DB::table('journal_has_tags')->insert([
-                    "journal_id" => $journal->id,
-                    "tag_id" => $tag,
-                    "created_at" => date('Y-m-d H:i:s'),
-                    "updated_at" => date('Y-m-d H:i:s')
+                    'journal_id' => $journal->id,
+                    'tag_id' => $tag,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s')
                   ]);
             }
         }
 
-        if($request->contacts)
+        if(!empty($request->contacts))
         {
             foreach ($request->contacts as $contact => $value) 
             {
                 DB::table('journal_has_contacts')->insert([
-                    "journal_id" => $journal->id,
-                    "contact_id" => $contact,
-                    "created_at" => date('Y-m-d H:i:s'),
-                    "updated_at" => date('Y-m-d H:i:s')
+                    'journal_id' => $journal->id,
+                    'contact_id' => $contact,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s')
                   ]);
             }
         }

@@ -16,6 +16,8 @@ class Tag extends Model
 
     protected $hidden = ['deleted_at'];
 
+    protected $touches = ['journals'];
+
     protected $fillable = [
         'name'
     ];

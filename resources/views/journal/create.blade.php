@@ -49,7 +49,7 @@
                                     <label for="date">Tarih</label>
                                 </div>
                                 <div class="col-9">
-                                    <input type="datetime-local" class="form-control @error('date') is-invalid @enderror" name="date" id="date" value="{{ old('date') }}">
+                                    <input type="date" class="form-control @error('date') is-invalid @enderror" name="date" id="date" value="{{ old('date') }}">
 
                                     @error('date')
                                         <span class="invalid-feedback" role="alert">
