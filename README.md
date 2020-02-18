@@ -35,7 +35,7 @@ Run the database migrations (**!! Set  the  database  connection  in  .env  befo
 
 ***Warning :*** Seeding is for states and cities in Turkey. Before running the project **make sure you run seeder.**
 
-    php artisan migrate:fresh --seed
+    php artisan migrate --seed
 
 Start the local development server or use Valet instead.
 
@@ -58,7 +58,7 @@ You can now access the server at http://localhost:8000
 
 **Make  sure  you  set  the  correct  database  connection  information  before  running  the  migrations** [Environment  variables](#environment-variables)
 
-    php artisan migrate:fresh --seed
+    php artisan migrate --seed
 
     php artisan serve
 
