@@ -102,7 +102,7 @@
                                 </div>
                             </div>
 
-                            @if(!empty($tags))
+                            @if(count($tags) > 0)
                                 <div class="form-group row">
                                     <label class="col-3 text-right form-text">Etiketler</label>
 
@@ -110,7 +110,7 @@
                                         <div class="row">
                                             @foreach ($tags as $tag)
                                                 <div class="col-sm-3 mb-3 text-center">
-                                                    <label for="tags[{{$tag->id}}]" style="font-size:1rem; cursor: pointer;">{{$tag->name}}</label><br>
+                                                    <label for="tags[{{$tag->id}}]" style="font-size:0.8rem; cursor: pointer;">{{$tag->name}}</label><br>
                                                     <input type="checkbox" name="tags[{{$tag->id}}]" id="tags[{{$tag->id}}]" stlye="cursor: pointer;">
                                                 </div>
                                             @endforeach
@@ -121,15 +121,15 @@
                                 </div>
                             @endif
 
-                            @if(!empty($contacts))
+                            @if(count($contacts) > 0)
                                 <div class="form-group row">
-                                    <label class="col-3 text-right form-text">Etiketler</label>
+                                    <label class="col-3 text-right form-text">Kişiler</label>
 
                                     <div class="col-9">
                                         <div class="row">
                                             @foreach ($contacts as $contact)
                                                 <div class="col-sm-4 mb-3 text-center">
-                                                    <label for="contacts[{{$contact->id}}]" style="font-size:1rem; cursor: pointer;">{{$contact->fullname}}</label><br>
+                                                    <label for="contacts[{{$contact->id}}]" style="font-size:0.8rem; cursor: pointer;">{{$contact->fullname}}</label><br>
                                                     <input type="checkbox" name="contacts[{{$contact->id}}]" id="contacts[{{$contact->id}}]" stlye="cursor: pointer;">
                                                 </div>
                                             @endforeach
