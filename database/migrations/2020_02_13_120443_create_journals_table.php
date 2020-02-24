@@ -18,6 +18,7 @@ class CreateJournalsTable extends Migration
             $table->string('title');
             $table->date('date');
             $table->string('content')->nullable();
+            $table->string('photo')->nullable();
             $table->unsignedInteger('state_id'); // Not required. Can be avoidable.
             $table->foreign('state_id')->references('id')->on('states')->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->unsignedInteger('city_id');

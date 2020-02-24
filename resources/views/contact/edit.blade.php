@@ -1,12 +1,20 @@
 @extends('layouts.app')
 
+@section('css')
+<style>
+    div.preview {
+        max-width: 500px;
+    }
+</style>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <i class="fas fa-users"></i> Kişiler / <small># {{$contact->id}} nolu kişiyi düzenle</small>
+                    <i class="fas fa-user-edit"></i> Kişiler / <small>#{{$contact->id}} nolu kişiyi düzenle</small>
                     <button type="button" class="btn btn-sm btn-danger float-right deleteButton" data-route="contacts" data-Id="{{$contact->id}}">Sil</button>
                 </div>
 
@@ -70,6 +78,24 @@
                                     <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone" value="{{$contact->phone}}">
 
                                     @error('phone')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col-3 text-right form-text">
+                                    <label for="photo">Telefon</label>
+                                </div>
+                                <div class="col-9">
+                                    <div class="preview">
+                                        <img src="{{$contact->photo}}" alt="{{$contact->fullname}}">
+                                    <div>
+                                    <input type="file" class="@error('photo') is-invalid @enderror" name="photo" id="photo"></br>
+
+                                    @error('photo')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

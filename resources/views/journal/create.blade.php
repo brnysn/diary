@@ -140,6 +140,21 @@
                                 </div>
                             @endif
 
+                            <div class="row form-group">
+                                <div class="col-3 text-right form-text">
+                                    <label for="photo">Görsel</label>
+                                </div>
+                                <div class="col-9">
+                                    <input type="file" class="@error('photo') is-invalid @enderror" name="photo" id="photo" value="{{ old('photo') }}">
+
+                                    @error('photo')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
                             <div class="row">
                                 <div class="col-12 text-center">
                                     <button type="submit" class="btn btn-primary">Kaydet</button>

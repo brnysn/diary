@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <i class="fas fa-users"></i> Kişiler / <small>Kişi Ekle</small>
+                    <i class="fas fa-user-plus"></i> Kişiler / <small>Kişi Ekle</small>
                 </div>
 
                 <div class="card-body">
@@ -68,6 +68,21 @@
                                     <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone" value="{{ old('phone') }}">
 
                                     @error('phone')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col-3 text-right form-text">
+                                    <label for="photo">Görsel</label>
+                                </div>
+                                <div class="col-9">
+                                    <input type="file" class="@error('photo') is-invalid @enderror" name="photo" id="photo" value="{{ old('photo') }}">
+
+                                    @error('photo')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

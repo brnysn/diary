@@ -1,12 +1,20 @@
 @extends('layouts.app')
 
+@section('css')
+<style>
+    div.preview {
+        max-width: 500px;
+    }
+</style>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <i class="fas fa-users"></i> Günlük / <small># {{$journal->id}} nolu günlüğü düzenle</small>
+                    <i class="fas fa-users"></i> Günlük / <small>#{{$journal->id}} nolu günlüğü düzenle</small>
                     <button type="button" class="btn btn-sm btn-danger float-right deleteButton" data-route="journals" data-Id="{{$journal->id}}">Sil</button>
                 </div>
 
@@ -150,6 +158,23 @@
                                 </div>
                             @endif
 
+                            <div class="row form-group">
+                                <div class="col-3 text-right form-text">
+                                    <label for="photo">Görsel</label>
+                                </div>
+                                <div class="col-9">
+                                    <div class="preview">
+                                        <img src="{{$contact->photo}}" alt="{{$contact->fullname}}">
+                                    <div>
+                                    <input type="file" class="@error('photo') is-invalid @enderror" name="photo" id="photo">
+
+                                    @error('photo')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
 
                             <div class="row">
                                 <div class="col-12 text-center">

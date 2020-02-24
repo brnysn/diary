@@ -16,7 +16,7 @@ class Journal extends Model
     protected $hidden = ['deleted_at'];
 
     protected $fillable = [
-        'title', 'date', 'content', 'state_id', 'city_id'
+        'title', 'date', 'content', 'photo', 'state_id', 'city_id'
     ];
 
     public function tags()

@@ -4,9 +4,30 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Contact;
+use Image;
+use File;
 
 class ContactController extends Controller
 {
+
+    private function save_photo($photo, $id){
+        $path = public_path().'/uploads/contacts/'.$id;
+        if(!File::isDirectory($path)) File::makeDirectory($path, 0775, true, true);
+
+        foreach (['1000','500'] as $width) {
+            ($width== '1000') ? $suffix = '1' : $suffix = '1_' . $width ;
+            $img = Image::make($photo)->encode('jpg');
+            $img->resize($width, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $img->save($path . "/" . $suffix . ".jpg", 100);
+        }
+        Contact::updateOrCreate(
+            ['id' => $id],
+            ['photo' => $path."/1.jpg"]
+        );
+    }
+
     public function datatable(){
         return datatables(Contact::all())->toJson();
     }
@@ -48,7 +69,11 @@ class ContactController extends Controller
 
         $contact = Contact::findOrFail($id);
 
-        $contact->update($request->all());
+        $contact->update($request->except('photo'));
+
+        if ($request->has('photo')) {
+            $this->save_photo($request->photo, $contact->id);
+        }
 
         return redirect()->route('contacts.index')->withSuccess('Kişi başarılı bir şekilde güncellendi.');
     }
@@ -71,7 +96,11 @@ class ContactController extends Controller
             'lastname.min' => 'Kişi soyismi en az 2 karakter olmak zorundadır.',
         ]);
     
-        Contact::create($request->all());
+        $contact = Contact::create($request->except('photo'));
+
+        if ($request->has('photo')) {
+            $this->save_photo($request->photo, $contact->id);
+        }
 
         return redirect()->route('contacts.index')->withSuccess('Kişi başarılı bir şekilde kaydedildi.');
     }

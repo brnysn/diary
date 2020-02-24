@@ -8,10 +8,31 @@ use App\Journal;
 use App\Tag;
 use App\Contact;
 use App\State;
+use Image;
+use File;
 
 
 class JournalController extends Controller
 {
+
+    private function save_photo($photo, $id){
+        $path = public_path().'/uploads/journals/'.$id;
+        if(!File::isDirectory($path)) File::makeDirectory($path, 0775, true, true);
+
+        foreach (['1000','500'] as $width) {
+            ($width== '1000') ? $suffix = '1' : $suffix = '1_' . $width ;
+            $img = Image::make($photo)->encode('jpg');
+            $img->resize($width, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $img->save($path . "/" . $suffix . ".jpg", 100);
+        }
+        Journal::updateOrCreate(
+            ['id' => $id],
+            ['photo' => $path."/1.jpg"]
+        );
+    }
+
     public function datatable(){
         return datatables(Journal::with(['tags', 'contacts', 'state', 'city'])->get())->toJson();
     }
@@ -56,16 +77,20 @@ class JournalController extends Controller
 
         $journal = Journal::findOrFail($id);
 
-        $journal->update($request->except('tags', 'contacts'));
+        $journal->update($request->except('tags', 'contacts', 'photo'));
 
-        if(!empty($request->tags))
+        if ($request->has('photo')) {
+            $this->save_photo($request->photo, $journal->id);
+        }
+
+        if($request->has('tags'))
         {
             $journal->tags()->sync( array_keys($request->tags) );
         } else {
             $journal->tags()->detach();
         }
 
-        if(!empty($request->contacts))
+        if($request->has('contacts'))
         {
             $journal->contacts()->sync( array_keys($request->contacts) );
         } else {
@@ -97,9 +122,13 @@ class JournalController extends Controller
             'city_id.numeric' => 'Lütfen geçerli bir ilçe seçiniz.'
         ]);
     
-        $journal = Journal::create($request->except('tags', 'contacts'));
+        $journal = Journal::create($request->except('tags', 'contacts', 'photo'));
+        
+        if ($request->has('photo')) {
+            $this->save_photo($request->photo, $journal->id);
+        }
 
-        if(!empty($request->tags))
+        if($request->has('tags'))
         {
             foreach ($request->tags as $tag => $value) 
             {
@@ -112,7 +141,7 @@ class JournalController extends Controller
             }
         }
 
-        if(!empty($request->contacts))
+        if($request->has('contacts'))
         {
             foreach ($request->contacts as $contact => $value) 
             {

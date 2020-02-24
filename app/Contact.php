@@ -18,7 +18,7 @@ class Contact extends Model
     protected $touches = ['journals'];
 
     protected $fillable = [
-        'firstname', 'lastname', 'email', 'phone'
+        'firstname', 'lastname', 'email', 'phone', 'photo'
     ];
     
     protected $appends = [
