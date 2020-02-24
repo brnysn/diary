@@ -146,8 +146,6 @@
 				},
 			],
             "initComplete": function( settings, json ) {
-                console.log(settings)
-                console.log(json)
                 journalStates.forEach(state => {
                     $('#statesMenu').append(`
                         <a class="filterSelect dropdown-item" href="#" data-val="`+state+`" data-column="6" data-name="`+state+`" data-title="#filterStateDropdown">
